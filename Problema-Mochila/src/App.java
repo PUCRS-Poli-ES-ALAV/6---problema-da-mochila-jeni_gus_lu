@@ -60,12 +60,12 @@ public class App {
                 if(A[i] == B[j]){
                     custoExtra = 0;
                 }else{
-                    
+                    custoExtra = 1;
                 }
-
+                matriz[i][j] = Math.min(matriz[i-1][j]+ 1, matriz[i][j-1]+1, matriz[i-1][j-1]+custoExtra);    
                 }
             }
         }
-        return 0;
+        return matriz[m][n];
     }
 }
