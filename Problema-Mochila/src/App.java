@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        
         int[] pesos  = new int[]{31, 29, 44, 53, 38 ,63, 85, 89, 82, 23};
         int[] valores  = new int[]{ 57, 49, 68, 60, 43, 67, 84, 87, 72, 92};
         double[][] razao = new double[pesos.length][3];
@@ -42,5 +42,30 @@ public class App {
         }
 
 
+    }
+    public int distEdProgDina(String A, String B){
+        int m = A.length();
+        int n = B.length();
+        int custoExtra = 0;
+        int matriz[][] = new int [0][0];
+
+        for(int i = 1; i < m; i++){
+            matriz[i][0] = matriz[i-1][0] + 1;
+        }
+        for(int j = 1; j< n; j++){
+            matriz[0][j] = matriz[0][j-1] + 1;
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                if(A[i] == B[j]){
+                    custoExtra = 0;
+                }else{
+                    
+                }
+
+                }
+            }
+        }
+        return 0;
     }
 }
