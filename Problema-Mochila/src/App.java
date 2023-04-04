@@ -6,6 +6,12 @@ import java.lang.Math;;
 public class App {
     public static void main(String[] args) throws Exception {
         
+        System.out.println(distEdProgDina("casa", "pai"));
+
+
+    }
+
+    public static void mochilaErrado() {
         int[] pesos  = new int[]{31, 29, 44, 53, 38 ,63, 85, 89, 82, 23};
         int[] valores  = new int[]{ 57, 49, 68, 60, 43, 67, 84, 87, 72, 92};
         double[][] razao = new double[pesos.length][3];
@@ -27,6 +33,7 @@ public class App {
                 return Double.compare(a[2], b[2]);
             }
         });
+
         System.out.println();
         for (int n = 0; n < razao.length; n++ ) {
             System.out.println(Arrays.toString(razao[n]));
@@ -41,24 +48,24 @@ public class App {
                 System.out.println("mochila: "+ razao[n][0] + " " + razao[n][1] );
             }
         }
-
-
     }
-    public int distEdProgDina(String A, String B){
+
+    public static int distEdProgDina(String A, String B){
         int m = A.length();
         int n = B.length();
         int custoExtra = 0;
-        int matriz[][] = new int [m][n];
+        int matriz[][] = new int [m+1][n+1];
+        // matriz[0][0] = 0;
 
-        for(int i = 1; i < m; i++){
+        for(int i = 1; i <= m; i++){
             matriz[i][0] = matriz[i-1][0] + 1;
         }
-        for(int j = 1; j< n; j++){
+        for(int j = 1; j<= n; j++){
             matriz[0][j] = matriz[0][j-1] + 1;
         }
-        for(int i = 1; i < m; i++){
-            for(int j = 1; j < n; j++){
-                if(A.charAt(i) == B.charAt(j)){
+        for(int i = 1; i <= m; i++){
+            for(int j = 1; j <= n; j++){
+                if(A.charAt(i-1) == B.charAt(j-1)){
                     custoExtra = 0;
                 }else{
                     custoExtra = 1;
