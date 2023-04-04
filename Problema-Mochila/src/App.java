@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.lang.Math;;
 
 
 
@@ -47,7 +48,7 @@ public class App {
         int m = A.length();
         int n = B.length();
         int custoExtra = 0;
-        int matriz[][] = new int [0][0];
+        int matriz[][] = new int [m][n];
 
         for(int i = 1; i < m; i++){
             matriz[i][0] = matriz[i-1][0] + 1;
@@ -57,13 +58,13 @@ public class App {
         }
         for(int i = 1; i < m; i++){
             for(int j = 1; j < n; j++){
-                if(A[i] == B[j]){
+                if(A.charAt(i) == B.charAt(j)){
                     custoExtra = 0;
                 }else{
                     custoExtra = 1;
                 }
-                matriz[i][j] = Math.min(matriz[i-1][j]+ 1, matriz[i][j-1]+1, matriz[i-1][j-1]+custoExtra);    
-                }
+                matriz[i][j] = Math.min(matriz[i-1][j]+ 1, Math.min(matriz[i][j-1]+1, matriz[i-1][j-1]+custoExtra));    
+                
             }
         }
         return matriz[m][n];
