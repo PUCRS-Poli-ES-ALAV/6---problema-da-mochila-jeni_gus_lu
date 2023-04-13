@@ -4,11 +4,65 @@ import java.lang.Math;;
 
 
 public class App {
+    
+    static int cont = 0;
+
     public static void main(String[] args) throws Exception {
+
+        int n = 4; // 4, 8, 16, 32
+        //int[] f = new int[n+128]; // 128, 1000, 10.000
         
-        System.out.println(distEdProgDina("casa", "pai"));
+        //System.out.println(memoizedFibo(f, n)+" contador: "+ cont);
+        
+        //System.out.println(fibo(n)+" contador: "+ cont);
+        
+        System.out.println(fiboRec(n)+" contador: "+ cont);
+        
+        //System.out.println(distEdProgDina("casa", "pai"));
 
 
+
+    }
+    public static int fiboRec(int n){
+        cont++;
+        if(n <= 1){
+            return n;
+    }
+        else{
+            int a = fiboRec(n - 1);
+            int b = fiboRec(n - 2);
+            return a + b;
+        }
+    }
+    
+
+    public static int fibo(int n){
+        int[] f = new int[n+1];
+        f[0] = 0; 
+	    f[1] = 1;
+	    for(int i = 2; i <= n;i++){
+            f[i] = f[i-1] + f[i-2];
+        }
+        return f[n];
+    }
+
+  	public static int memoizedFibo(int[] f, int n) {
+        for (int i = 0; i <= n; i++) {
+            f[i] = -1;
+        }
+        return lookupFibo(f, n);
+    }
+
+    public static int lookupFibo(int[] f, int n) {
+        if (f[n] >= 0) {
+            return f[n];
+        }
+        if (n <= 1) {
+            f[n] = n;
+        } else {
+            f[n] = lookupFibo(f, n-1) + lookupFibo(f, n-2);
+        }
+        return f[n];
     }
 
     public static void mochilaErrado() {
