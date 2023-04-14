@@ -18,10 +18,7 @@ public class App {
 
         // System.out.println(distEdProgDina("casa", "pai"));
 
-        // int[] pesos = new int[]{31, 29, 44, 53, 38 ,63, 85, 89, 82, 23};
-        // int[] valores = new int[]{ 57, 49, 68, 60, 43, 67, 84, 87, 72, 92};
-        // double[][] razao = new double[pesos.length][3];
-        // System.out.println(backPackPD(10, 190, razao[][]));
+        mochilaErrado();
 
     }
 
@@ -67,63 +64,45 @@ public class App {
         return f[n];
     }
 
-    public static int backPackPD(int N, int C, int[][] itens) {
-        int[][] maxTab = new int[N + 1][C + 1];
-        for (int i = 0; i <= N; i++) {
-            maxTab[i][0] = 0;
+    public static void mochilaErrado() {
+        cont++;
+        int[] pesos = new int[] { 31, 29, 44, 53, 38, 63, 85, 89, 82, 23 };
+        int[] valores = new int[] { 57, 49, 68, 60, 43, 67, 84, 87, 72, 92 };
+        double[][] razao = new double[pesos.length][3];
+
+        int capacidade = 190;
+        int usado = 0;
+        int valorFinal = 0;
+
+        for (int n = 0; n < razao.length; n++) {
+            razao[n][0] = valores[n];
+            razao[n][1] = pesos[n];
+            razao[n][2] = valores[n] / (pesos[n] * 1.0);
+
+            System.out.println(Arrays.toString(razao[n]));
         }
-        for (int j = 0; j <= C; j++) {
-            maxTab[0][j] = 0;
+
+        java.util.Arrays.sort(razao, new java.util.Comparator<double[]>() {
+            public int compare(double[] a, double[] b) {
+                return Double.compare(a[2], b[2]);
+            }
+        });
+
+        System.out.println();
+        for (int n = 0; n < razao.length; n++) {
+            System.out.println(Arrays.toString(razao[n]));
         }
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= C; j++) {
-                if (itens[i][0] <= j) {
-                    maxTab[i][j] = Math.max(maxTab[i - 1][j], itens[i][1] + maxTab[i - 1][j - itens[i][0]]);
-                } else {
-                    maxTab[i][j] = maxTab[i - 1][j];
-                }
+
+        for (int n = razao.length - 1; n >= 0; n--) {
+            if (usado + razao[n][1] <= capacidade) {
+                usado += razao[n][1];
+                valorFinal += razao[n][0];
+
+                System.out.println("mochila: " + razao[n][0] + " " + razao[n][1]);
             }
         }
-        return maxTab[N][C];
+        System.out.println("contador: "+cont);
     }
-
-    // public static void mochilaErrado() {
-    // int[] pesos = new int[]{31, 29, 44, 53, 38 ,63, 85, 89, 82, 23};
-    // int[] valores = new int[]{ 57, 49, 68, 60, 43, 67, 84, 87, 72, 92};
-    // double[][] razao = new double[pesos.length][3];
-
-    // int capacidade = 190;
-    // int usado = 0;
-    // int valorFinal = 0;
-
-    // for (int n = 0; n < razao.length; n++ ) {
-    // razao[n][0] = valores[n];
-    // razao[n][1] = pesos[n];
-    // razao[n][2] = valores[n]/(pesos[n] * 1.0);
-
-    // System.out.println(Arrays.toString(razao[n]));
-    // }
-
-    // java.util.Arrays.sort(razao, new java.util.Comparator<double[]>() {
-    // public int compare(double[] a, double[] b) {
-    // return Double.compare(a[2], b[2]);
-    // }
-    // });
-
-    // System.out.println();
-    // for (int n = 0; n < razao.length; n++ ) {
-    // System.out.println(Arrays.toString(razao[n]));
-    // }
-
-    // for (int n = razao.length - 1; n >= 0; n-- ) {
-    // if (usado + razao[n][1] <= capacidade) {
-    // usado += razao[n][1];
-    // valorFinal += razao[n][0];
-
-    // System.out.println("mochila: "+ razao[n][0] + " " + razao[n][1] );
-    // }
-    // }
-    // }
 
     public static int distEdProgDina(String A, String B) {
         int m = A.length();
